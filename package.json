@@ -9,7 +9,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "packageManager": "pnpm@9.12.0"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.3",
