@@ -1,6 +1,6 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "compilerOptions": {
+    "extends": "./node_modules/astro/tsconfigs/base",
+    "compilerOptions": {
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
@@ -13,3 +13,4 @@
     }
   }
 }
+
