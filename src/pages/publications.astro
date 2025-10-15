@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeLineElement from "../components/publications/TimeLine.astro";
+---
+
+<BaseLayout title="Publications" sideBarActiveItemID="cv">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Under Review</div>
+  </div>
+
+  <div class="time-line-container grid gap-4 mb-10">
+    <TimeLineElement
+      title="Duke University"
+      subtitle="B.A. in Psychology, Minor in Evolutionary Anthropology"
+      caption ="2021-2025 | Durham, NC"
+    />
+    <TimeLineElement
+      title="International Baccalaureate Diploma"
+      subtitle="Washington-Liberty High School"
+      caption="2017-2021 | Arlington, VA"
+    />
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Pre-Prints</div>
+  </div>
+
+   <div class="mb-5">
+    <div class="text-3xl w-full font-bold">In Preparation</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="Lab Manager at the Tomasello Lab"
+      subtitle="2025-Present | Duke University"
+    >
+    </TimeLineElement>
+    <TimeLineElement
+      title="Affiliated Researcher at the Mind and Culture Lab"
+      subtitle="2024-Present | Duke University"
+    >
+    </TimeLineElement>
+    <TimeLineElement
+      title="Lead Researcher at the BRITE Lab"
+      subtitle="2022-Present | Duke University"
+    >
+    </TimeLineElement>
+  </div>
+
+     <div class="mt-8">
+      <a href="https://docs.google.com/document/d/1pGDpktHWTOFIAoS9j6Z6NZcigpKv67fye2jeIm_RL6U/edit?usp=sharing" target="_blank" class="btn btn-outline ml-5">
+        Click here for access to my full CV 
+      </a>
