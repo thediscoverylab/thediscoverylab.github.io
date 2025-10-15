@@ -5,35 +5,23 @@ module.exports = {
   theme: { extend: {} },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
-    // Do NOT auto-switch to a dark theme
-    darkTheme: null,
-    themes: [
-      // Global site theme: black text on white
-      {
-        lightwhite: {
-          'base-100': '#ffffff',   // page background
-          'base-content': '#000000',
-          'primary': '#6B8E23',    // olive
-          'primary-content': '#ffffff',
-          'accent': '#6B8E23',
-          'accent-content': '#ffffff',
-          // safe neutrals for borders/cards etc.
-          'neutral': '#2f2f2f',
-          'neutral-content': '#f5f5f5',
-        },
+  darkTheme: null,
+  themes: [
+    {
+      lightwhite: {
+        'base-100': '#ffffff',
+        'base-content': '#000000',
+        'primary': '#6B8E23', // olive
+        'primary-content': '#ffffff',
       },
-      // Sidebar-only theme (manually applied with data-theme="black")
-      {
-        black: {
-          'base-100': '#000000',   // sidebar bg (pure black)
-          'base-content': '#ffffff',
-          'primary': '#6B8E23',
-          'primary-content': '#ffffff',
-          'neutral': '#000000',
-          'neutral-content': '#ffffff',
-        },
+    },
+    {
+      sidebarDark: {
+        'base-100': '#1f1f1f', // dark gray
+        'base-content': '#ffffff', // white text
+        'primary': '#6B8E23',
+        'primary-content': '#ffffff',
       },
-    ],
-    logs: false,
-  },
-}
+    },
+  ],
+},}
