@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+---
+const images = [
+  { src: "/gallery/img1.webp", caption: "Fieldwork in Leipzig" },
+  { src: "/gallery/img2.webp", caption: "Collaboration at Duke" },
+  { src: "/gallery/img3.webp", caption: "Conference Poster" },
+  { src: "/gallery/img4.webp", caption: "Coding Session" },
+  { src: "/gallery/img5.webp", caption: "Lab Meeting" },
+  { src: "/gallery/img6.webp", caption: "Playroom Setup" },
+  { src: "/gallery/img7.webp", caption: "Experiment Run" },
+  { src: "/gallery/img8.webp", caption: "Team Dinner" },
+  { src: "/gallery/img9.webp", caption: "Data Collection" },
+  { src: "/gallery/img10.webp", caption: "Community Event" },
+  { src: "/gallery/img11.webp", caption: "Analysis Time" },
+  { src: "/gallery/img12.webp", caption: "Conference Talk" },
+  { src: "/gallery/img13.webp", caption: "Research Poster" },
+  { src: "/gallery/img14.webp", caption: "Outreach Day" },
+  { src: "/gallery/img15.webp", caption: "Study Room" },
+  { src: "/gallery/img16.webp", caption: "Final Presentation" },
+];
+---
+
+<section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4">
+  {images.map((img) => (
+    <div class="relative group overflow-hidden rounded-xl shadow-md">
+      <img
+        src={img.src}
+        alt={img.caption}
+        class="w-full h-48 object-cover transition duration-300 ease-in-out group-hover:opacity-60"
+      />
+      <div
+        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100
+        transition-opacity duration-300 bg-black/60 text-white text-center text-sm p-2"
+      >
+        {img.caption}
+      </div>
+    </div>
+  ))}
+</section>
