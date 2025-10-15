@@ -5,26 +5,27 @@ module.exports = {
   theme: { extend: {} },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
+    // Do NOT auto-switch to a dark theme
+    darkTheme: null,
     themes: [
-      // Default: black text on white background
+      // Global site theme: black text on white
       {
         lightwhite: {
-          'base-100': '#ffffff', // page bg
-          'base-content': '#000000', // text
-          // Accent = olive green
-          'primary': '#6B8E23',            // use for buttons/links you want branded
+          'base-100': '#ffffff',   // page background
+          'base-content': '#000000',
+          'primary': '#6B8E23',    // olive
           'primary-content': '#ffffff',
           'accent': '#6B8E23',
           'accent-content': '#ffffff',
-          // Greys for borders, cards, etc.
-          'neutral': '#2b2b2b',
-          'neutral-content': '#f9f9f9',
+          // safe neutrals for borders/cards etc.
+          'neutral': '#2f2f2f',
+          'neutral-content': '#f5f5f5',
         },
       },
-      // Sidebar-only theme (applied locally with data-theme="black")
+      // Sidebar-only theme (manually applied with data-theme="black")
       {
         black: {
-          'base-100': '#000000',   // sidebar bg
+          'base-100': '#000000',   // sidebar bg (pure black)
           'base-content': '#ffffff',
           'primary': '#6B8E23',
           'primary-content': '#ffffff',
@@ -33,7 +34,6 @@ module.exports = {
         },
       },
     ],
-    darkTheme: 'black', // not used globally; we’ll apply locally to the sidebar
     logs: false,
   },
 }
