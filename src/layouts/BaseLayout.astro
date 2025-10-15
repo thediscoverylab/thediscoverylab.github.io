@@ -22,14 +22,11 @@ const {
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
     {TRANSITION_API && <ViewTransitions />}
   </head>
-
   <body>
     <div class="drawer lg:drawer-open bg-base-100 text-base-content">
-      <!-- Toggle checkbox for mobile sidebar -->
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
-      <!-- Main content area -->
-      <div class="drawer-content bg-base-100 text-base-content">
+      <div class="drawer-content bg-base-100">
         <Header title={SITE_TITLE} />
         <div class="md:flex md:justify-center">
           <main class="p-6 pt-10 lg:max-w-[900px] max-w-[100vw]">
@@ -38,17 +35,8 @@ const {
         </div>
         <Footer />
       </div>
-      {includeSidebar && (
-        <aside class="drawer-side" data-theme="sidebarDark">
-          <!-- Overlay for mobile click-off -->
-          <label for="my-drawer" class="drawer-overlay"></label>
 
-          <!-- Sidebar container -->
-          <nav class="min-h-full w-72 bg-base-100 text-base-content">
-            <SideBar sideBarActiveItemID={sideBarActiveItemID} />
-          </nav>
-        </aside>
-      )}
+      {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
   </body>
 </html>
