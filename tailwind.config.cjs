@@ -37,4 +37,4 @@ module.exports = {
   ],
   darkTheme: 'black',
   logs: false,
-},
+}}
