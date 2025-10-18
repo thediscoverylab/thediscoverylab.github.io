@@ -13,17 +13,18 @@ const { sideBarActiveItemID } = Astro.props;
   <!-- Sidebar container -->
   <aside
     data-theme="sidebarDark"
-    class="px-4 pt-4 min-h-full w-[30rem] text-[1.05rem] md:text-[1.1rem] leading-relaxed text-base-content flex flex-col"
+    class="px-6 pt-6 min-h-full w-[25rem] text-[1.15rem] md:text-[1.25rem] leading-relaxed text-base-content flex flex-col"
   >
-    <div class="w-fit mx-auto mt-6 mb-8">
+    <!-- Profile Image -->
+    <div class="w-fit mx-auto mt-8 mb-10">
       <a href="/">
-        <div class="avatar transition ease-in-out hover:scale-[102%] block m-auto">
-          <div class="w-[13rem]">
+        <div class="avatar transition ease-in-out hover:scale-[103%] block m-auto">
+          <div class="w-[15rem]">
             <Image
-              class="mask mask-circle"
+              class="mask mask-circle object-cover"
               format="webp"
-              width={500}
-              height={500}
+              width={600}
+              height={600}
               src="/profile.webp"
               alt="Profile image"
             />
@@ -32,7 +33,10 @@ const { sideBarActiveItemID } = Astro.props;
       </a>
     </div>
 
+    <!-- Menu -->
     <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+
+    <!-- Footer -->
     <SideBarFooter />
   </aside>
 </div>
