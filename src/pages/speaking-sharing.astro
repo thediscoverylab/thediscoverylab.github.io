@@ -22,22 +22,22 @@ const images = [
   <div class="text-3xl font-bold">Speaking & Sharing</div>
 </div>
 </div>
-  <section class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 place-items-center">
-    {images.map((img) => (
-      <div class="relative group overflow-hidden rounded-full shadow-md w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48">
-        <img
-          src={img.src}
-          alt={img.caption}
-          loading="lazy"
-          class="w-full h-full object-cover rounded-full transition duration-300 ease-in-out group-hover:opacity-60"
-        />
-        <div
-          class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100
-                 transition-opacity duration-300 bg-black/60 text-white text-center text-sm p-2 rounded-full"
-        >
-          {img.caption}
-        </div>
+  <section class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 p-4">
+  {images.map((img) => (
+    <div class="w-full aspect-square relative group overflow-hidden rounded-full shadow-md">
+      <img
+        src={img.src}
+        alt={img.caption}
+        loading="lazy"
+        class="w-full h-full object-cover rounded-full transition duration-300 ease-in-out group-hover:opacity-60"
+      />
+      <div
+        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100
+               transition-opacity duration-300 bg-black/60 text-white text-center text-sm p-2 rounded-full"
+      >
+        {img.caption}
       </div>
-    ))}
-  </section>
+    </div>
+  ))}
+</section>
 </BaseLayout>
