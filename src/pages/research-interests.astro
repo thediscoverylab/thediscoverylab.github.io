@@ -8,13 +8,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div>
       <h2 class="text-3xl font-bold mb-6 text-left">Acute Changes to Childhood</h2>
 
-      <section class="grid md:grid-cols-[35%_65%] gap-8 items-stretch max-w-[1200px] mx-auto">
-        <!-- Left: Image -->
-        <div class="flex min-h-0">
+      <!-- 30% image / 70% text; equal-height columns -->
+      <section class="grid md:grid-cols-[30%_70%] gap-8 items-stretch max-w-[1200px] mx-auto">
+        <!-- Left: Image (no cropping) -->
+        <div class="rounded-2xl shadow-md bg-base-200 overflow-hidden min-h-[380px] flex items-center justify-center">
           <img
             src="/acute_changes.webp"
             alt="Acute Changes to Childhood"
-            class="w-full h-full max-h-[550px] object-cover rounded-2xl shadow-md"
+            class="max-w-full max-h-full object-contain"
           />
         </div>
 
@@ -44,13 +45,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div>
       <h2 class="text-3xl font-bold mb-6 text-left">Where Do Great Ideas Come From?</h2>
 
-      <section class="grid md:grid-cols-[35%_65%] gap-8 items-stretch max-w-[1200px] mx-auto">
-        <!-- Left: Image -->
-        <div class="flex min-h-0">
+      <!-- 30% image / 70% text; equal-height columns -->
+      <section class="grid md:grid-cols-[30%_70%] gap-8 items-stretch max-w-[1200px] mx-auto">
+        <!-- Left: Image (no cropping) -->
+        <div class="rounded-2xl shadow-md bg-base-200 overflow-hidden min-h-[380px] flex items-center justify-center">
           <img
             src="/great_ideas.webp"
             alt="Where Do Great Ideas Come From?"
-            class="w-full h-full max-h-[550px] object-cover rounded-2xl shadow-md"
+            class="max-w-full max-h-full object-contain"
           />
         </div>
 
