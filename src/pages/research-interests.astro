@@ -3,75 +3,74 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Research Interests" sideBarActiveItemID="research-interests">
-
-    <div>
-    <div class="text-3xl w-full font-bold mb-5">Acute Changes to Childhood</div>
-  </div>
-
-  <div class="space-y-16">
+  <div class="space-y-20 px-4 md:px-10 xl:px-16">
     <!-- Acute Changes section -->
-    <section class="grid md:grid-cols-2 md:gap-10 gap-6 items-stretch">
-        <div class="flex-1 min-h-0">
+    <div>
+      <h2 class="text-3xl font-bold mb-6 text-left">Acute Changes to Childhood</h2>
+
+      <section class="grid md:grid-cols-[35%_65%] gap-8 items-stretch max-w-[1200px] mx-auto">
+        <!-- Left: Image -->
+        <div class="flex min-h-0">
           <img
             src="/acute_changes.webp"
             alt="Acute Changes to Childhood"
-            class="w-full h-full object-cover rounded-2xl shadow-md"
+            class="w-full h-full max-h-[550px] object-cover rounded-2xl shadow-md"
           />
         </div>
-      </div>
 
-      <!-- Right: Background + Big Questions -->
-      <div class="flex flex-col justify-start h-full text-left leading-relaxed">
-        <h2 class="text-xl font-bold mb-4">Background</h2>
-        <p class="text-left leading-relaxed">
-          Children are spending more time interacting with adults and technology, and less time interacting with peers.
-          Importantly, when children interact with peers, they co-construct knowedge with an intellecual equal. In contrast,
-          adult-directed activities and virtual environments lead to more passive forms of learning.
-          As a result, these acute changes to childhood may have important implications for children's cooperation,
-          learning, exploration, and idea-generation. My research aims to understand how these shifts impact children's social and
-          cognitive development, with the ultimate goal of informing educational practices and parenting strategies.
-        </p>
+        <!-- Right: Text -->
+        <div class="flex flex-col justify-start h-full text-left leading-relaxed">
+          <h2 class="text-xl font-bold mb-4">Background</h2>
+          <p class="text-left leading-relaxed">
+            Children are spending more time interacting with adults and technology, and less time interacting with peers.
+            Importantly, when children interact with peers, they co-construct knowedge with an intellecual equal. In contrast,
+            adult-directed activities and virtual environments lead to more passive forms of learning.
+            As a result, these acute changes to childhood may have important implications for children's cooperation,
+            learning, exploration, and idea-generation. My research aims to understand how these shifts impact children's social and
+            cognitive development, with the ultimate goal of informing educational practices and parenting strategies.
+          </p>
 
-        <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>How does adult presence and direction shape children's exploration and cooperative learning?</li>
-          <li>What is the variability across children's information processing, construction, and discovery? How do acute changes to childhood shape this variability?</li>
-          <li>How does living in a virtual environment impact children's social learning and cognitive flexibility?</li>
-        </ul>
-      </div>
-    </section>
-
-        <div>
-    <div class="text-3xl w-full font-bold mb-5">Acute Changes to Childhood</div>
-  </div>
+          <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>How does adult presence and direction shape children's exploration and cooperative learning?</li>
+            <li>What is the variability across children's information processing, construction, and discovery? How do acute changes to childhood shape this variability?</li>
+            <li>How does living in a virtual environment impact children's social learning and cognitive flexibility?</li>
+          </ul>
+        </div>
+      </section>
+    </div>
 
     <!-- Great Ideas section -->
-    <section class="grid md:grid-cols-2 md:gap-10 gap-6 items-stretch">
-        <div class="flex-1 min-h-0">
+    <div>
+      <h2 class="text-3xl font-bold mb-6 text-left">Where Do Great Ideas Come From?</h2>
+
+      <section class="grid md:grid-cols-[35%_65%] gap-8 items-stretch max-w-[1200px] mx-auto">
+        <!-- Left: Image -->
+        <div class="flex min-h-0">
           <img
             src="/great_ideas.webp"
             alt="Where Do Great Ideas Come From?"
-            class="w-full h-full object-cover rounded-2xl shadow-md"
+            class="w-full h-full max-h-[550px] object-cover rounded-2xl shadow-md"
           />
         </div>
-      </div>
 
-      <!-- Right: Background + Big Questions -->
-      <div class="flex flex-col justify-start h-full text-left leading-relaxed">
-        <h2 class="text-xl font-bold mb-4">Background</h2>
-        <p class="text-left leading-relaxed">
-          Bayesian learning can explain remarkably complex real-world inference, but it is less clear where new priors
-          originate. Babies and young children constantly generate fresh hypotheses about the world. How do they do this
-          so effectively? And how might treating Bayesian learning as a developmentally conditioned process (shaped by
-          agentic exploration, social interaction, and maturation) help explain the origins of creative ideas?
-        </p>
+        <!-- Right: Text -->
+        <div class="flex flex-col justify-start h-full text-left leading-relaxed">
+          <h2 class="text-xl font-bold mb-4">Background</h2>
+          <p class="text-left leading-relaxed">
+            Bayesian learning can explain remarkably complex real-world inference, but it is less clear where new priors
+            originate. Babies and young children constantly generate fresh hypotheses about the world. How do they do this
+            so effectively? And how might treating Bayesian learning as a developmentally conditioned process (shaped by
+            agentic exploration, social interaction, and maturation) help explain the origins of creative ideas?
+          </p>
 
-        <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
-        <ul class="list-disc pl-6 space-y-2">
-          <li>Many of our best ideas come when we least expect them. The harder we look, the more elusive creative solutions seem to become. But, what if we could use computational models to predict moments of insight? Could we reliably produce great ideas?</li>
-          <li>How do curiosity, play, and peer interaction scaffold hypothesis generation in childhood?</li>
-        </ul>
-      </div>
-    </section>
+          <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Many of our best ideas come when we least expect them. The harder we look, the more elusive creative solutions seem to become. But, what if we could use computational models to predict moments of insight? Could we reliably produce great ideas?</li>
+            <li>How do curiosity, play, and peer interaction scaffold hypothesis generation in childhood?</li>
+          </ul>
+        </div>
+      </section>
+    </div>
   </div>
 </BaseLayout>
