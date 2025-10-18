@@ -13,9 +13,9 @@ const { sideBarActiveItemID } = Astro.props;
   <!-- Sidebar container -->
   <aside
     data-theme="sidebarDark"
-    class="px-8 pt-8 min-h-full w-[26rem] text-[1.6rem] md:text-[1.8rem] leading-relaxed text-base-content flex flex-col"
+    class="px-8 pt-8 min-h-full w-[26rem] leading-relaxed text-base-content flex flex-col"
   >
-    <!-- Profile Image -->
+    <!-- Profile Image (unchanged) -->
     <div class="w-fit mx-auto mt-8 mb-10">
       <a href="/">
         <div class="avatar transition ease-in-out hover:scale-[103%] block m-auto">
@@ -33,11 +33,12 @@ const { sideBarActiveItemID } = Astro.props;
       </a>
     </div>
 
-    <!-- Sidebar Menu -->
-    <div class="flex-1">
+    <!-- FORCE bigger text only for the menu links/buttons -->
+    <div class="[&_.menu]:!text-xl md:[&_.menu]:!text-2xl [&_.menu_li>*]:!text-inherit [&_.menu_a]:!text-inherit">
       <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     </div>
 
-        <SideBarFooter />
+    <!-- Footer left untouched so your icons don’t shift -->
+    <SideBarFooter />
   </aside>
 </div>
