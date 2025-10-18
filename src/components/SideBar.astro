@@ -43,14 +43,46 @@ const { sideBarActiveItemID } = Astro.props;
   </aside>
 </div>
 
-<!-- Force bigger menu text regardless of DaisyUI defaults -->
+<!-- Force bigger menu text & normalize icon alignment -->
 <style is:global>
-  /* Target only this sidebar instance via data-theme on the aside */
+  /* ========================
+     Menu text sizing (yours)
+     ======================== */
   aside[data-theme="sidebarDark"] .menu,
   aside[data-theme="sidebarDark"] .menu :is(a, button, span) {
-    font-size: 1.3rem !important;   /* bump size: ~24px */
+    font-size: 1.3rem !important;   /* ~24px */
     line-height: 1.4 !important;
   }
-  /* Optional: slightly tighter list spacing if needed */
-  aside[data-theme="sidebarDark"] .menu li { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+  aside[data-theme="sidebarDark"] .menu li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* ==========================================
+     Icon baseline normalization for the footer
+     (assumes your footer icons live in .social-icons)
+     ========================================== */
+  aside[data-theme="sidebarDark"] .social-icons a {
+    display: inline-flex;       /* centers the SVG within a square */
+    align-items: center;
+    justify-content: center;
+    width: 24px;                /* consistent icon box */
+    height: 24px;
+    line-height: 0;             /* kills baseline gap */
+  }
+
+  aside[data-theme="sidebarDark"] .social-icons svg {
+    display: block;             /* removes inline-baseline sag */
+    vertical-align: middle;
+    width: 20px;                /* consistent inner glyph size */
+    height: 20px;
+  }
+
+  /* Fallbacks if your footer doesn't use .social-icons:
+     these will still fix baseline sag without affecting layout */
+  aside[data-theme="sidebarDark"] footer a svg,
+  aside[data-theme="sidebarDark"] .sidebar-footer a svg {
+    display: block;
+    vertical-align: middle;
+  }
 </style>
