@@ -1,135 +1,51 @@
 ---
-const { size = 56 } = Astro.props;
+const { delay = 0, duration = 18, size = 56 } = Astro.props;
 ---
 
-<div id="butterfly" class="butterfly" style={`--size:${size}px; --offset:0%;`}>
-  <img src="/butterfly.svg" alt="" aria-hidden="true" />
+<div class="butterfly-fly"
+     style={`--dur:${duration}s; --delay:${delay}s; --size:${size}px;`}>
+  <img src="/butterfly.svg" alt="Butterfly" aria-hidden="true" />
 </div>
 
 <style>
-  .butterfly {
-    position: fixed;
-    inset: 0; /* use viewport coords for the motion path */
+  .butterfly-fly {
+    position: fixed;              /* floats over everything */
+    inset: 0;                     /* flight path in viewport coords */
     width: var(--size);
     height: var(--size);
-    pointer-events: none;
-    z-index: 60; /* above header/sidebar; bump if needed */
-    offset-rotate: auto 90deg;
-    /* no CSS animation; JS updates --offset continuously */
-    offset-distance: var(--offset);
-  }
-  .butterfly img { display:block; width:100%; height:100%; }
+    pointer-events: none;         /* don't block clicks */
+    z-index: 40;
 
-  /* Respect reduced-motion */
+    /* Flight path & orientation */
+    offset-path: path("M 40 80 C 180 10, 320 150, 480 70 S 760 140, 920 40");
+    offset-rotate: auto 90deg;
+
+    /* Animate along the path */
+    animation: fly var(--dur) linear var(--delay) infinite alternate;
+  }
+
+  .butterfly-fly img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes fly {
+    to { offset-distance: 100%; }
+  }
+
+  /* Mobile: smaller & gentler path */
+  @media (max-width: 640px) {
+    .butterfly-fly {
+      width: calc(var(--size) * 0.8);
+      height: calc(var(--size) * 0.8);
+      offset-path: path("M 20 300 C 120 120, 220 360, 320 200 S 480 420, 620 240");
+      animation-duration: calc(var(--dur) * 1.2);
+    }
+  }
+
+  /* Respect reduced-motion preference */
   @media (prefers-reduced-motion: reduce) {
-    .butterfly { offset-distance: 0%; }
+    .butterfly-fly { animation: none !important; }
   }
 </style>
-
-<script>
-  // Guard reduced-motion
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) { /* no animation */ }
-
-  // Distinct storage key so we can evolve without clobbering old data
-  const KEY = 'butterflyState.v1';
-
-  // Two path sets: desktop & mobile. Tweak shapes as you like.
-  const pathsDesktop = [
-    "M 40 80 C 180 10, 320 150, 480 70 S 760 140, 920 40",
-    "M 50 200 C 200 20, 400 240, 600 120 S 900 260, 1100 80",
-    "M 120 120 C 260 40, 420 220, 560 120 S 820 220, 980 120",
-    "M 200 200 C 50 50, 350 50, 200 200 S 350 350, 200 200" // figure-8
-  ];
-  const pathsMobile = [
-    "M 20 300 C 120 120, 220 360, 320 200 S 480 420, 620 240",
-    "M 30 220 C 110 140, 210 300, 310 180 S 430 320, 510 220",
-    "M 40 260 C 150 180, 210 340, 300 240 S 420 320, 520 200"
-  ];
-
-  const isMobile = window.matchMedia('(max-width: 640px)').matches;
-  const PATHS = isMobile ? pathsMobile : pathsDesktop;
-
-  // Restore or create state
-  /** @type {{startEpoch:number, durationMs:number, pathIdx:number, pingpong:boolean}} */
-  let state;
-  try { state = JSON.parse(sessionStorage.getItem(KEY) || 'null'); } catch {}
-  const now = Date.now();
-
-  // Helper: random in [a,b]
-  const rand = (a,b) => a + Math.random() * (b - a);
-
-  if (!state || state.version !== 1 || state.pathIdx >= PATHS.length) {
-    // First page in the session (or shape set changed): choose fresh random state
-    const durationMs = Math.round(rand(16000, 26000)); // 16–26s per leg
-    const pathIdx = Math.floor(rand(0, PATHS.length));
-    const pingpong = Math.random() < 0.7; // mostly ping-pong; sometimes wrap
-    // Start somewhere random along the first leg by backdating the start time
-    const startPhase = Math.random(); // 0..1
-    const startEpoch = now - Math.floor(startPhase * durationMs);
-    state = { version: 1, startEpoch, durationMs, pathIdx, pingpong };
-    sessionStorage.setItem(KEY, JSON.stringify(state));
-  } else {
-    // If viewport class (mobile/desktop) changed, remap to a valid path index
-    if (state.pathIdx >= PATHS.length) state.pathIdx = state.pathIdx % PATHS.length;
-  }
-
-  const el = document.getElementById('butterfly');
-
-  // Apply current path to the element
-  const applyPath = () => {
-    const d = PATHS[state.pathIdx];
-    el.style.offsetPath = `path("${d}")`;
-  };
-  applyPath();
-
-  // Recompute path if viewport crosses mobile/desktop while browsing
-  const mq = window.matchMedia('(max-width: 640px)');
-  mq.addEventListener?.('change', () => {
-    // When layout class changes, keep the same index modulo new set length
-    const oldIdx = state.pathIdx;
-    const newPaths = mq.matches ? pathsMobile : pathsDesktop;
-    const newIdx = oldIdx % newPaths.length;
-    // Update and persist
-    state.pathIdx = newIdx;
-    sessionStorage.setItem(KEY, JSON.stringify(state));
-    // Swap path
-    el.style.offsetPath = `path("${newPaths[newIdx]}")`;
-  });
-
-  // Drive the animation using rAF so it doesn't "restart" on navigation:
-  // We compute the offset from absolute time (startEpoch), so each page
-  // resumes seamlessly.
-  let rafId = 0;
-  const tick = () => {
-    const tNow = Date.now();
-    const elapsed = tNow - state.startEpoch;
-    const T = state.durationMs;
-
-    // Compute progress in [0,1] of current leg
-    const cycle = Math.floor(elapsed / T);
-    const u = (elapsed % T) / T; // 0..1 within the leg
-
-    let offsetPct;
-    if (state.pingpong) {
-      // Even cycles go forward 0->100, odd cycles go back 100->0
-      const forward = (cycle % 2) === 0;
-      offsetPct = forward ? (u * 100) : (100 - u * 100);
-    } else {
-      // Wrap-around looping 0->100->0...
-      offsetPct = (u * 100);
-    }
-
-    el.style.setProperty('--offset', offsetPct + '%');
-    rafId = requestAnimationFrame(tick);
-  };
-  if (!reduce) rafId = requestAnimationFrame(tick);
-
-  // Persist on page hide so another page can pick up seamlessly
-  const persist = () => {
-    // nothing to update; startEpoch anchors continuity
-    sessionStorage.setItem(KEY, JSON.stringify(state));
-  };
-  window.addEventListener('visibilitychange', persist);
-  window.addEventListener('pagehide', persist);
-</script>
