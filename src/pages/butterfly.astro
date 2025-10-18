@@ -1,0 +1,74 @@
+---
+const { delay = 0, duration = 18, size = 48, pathId = "loopA" } = Astro.props;
+// delay (s), duration (s), size (px), choose path shape by id
+---
+
+<div class="butterfly"
+     style={`--dur:${duration}s; --delay:${delay}s; --size:${size}px; --path:${pathId};`}
+     aria-hidden="true">
+  <!-- Minimal inline butterfly: body + two wings grouped for flapping -->
+  <svg class="butterfly-svg" viewBox="0 0 100 100" role="img" aria-label="butterfly">
+    <!-- body -->
+    <rect x="48" y="30" width="4" height="40" rx="2" />
+    <circle cx="50" cy="28" r="4" />
+
+    <!-- left wing -->
+    <g class="wing wing-left" style="transform-origin: 50px 50px;">
+      <path d="M50,50 C20,10 5,30 10,50 C5,70 25,85 45,75 Z" />
+    </g>
+
+    <!-- right wing -->
+    <g class="wing wing-right" style="transform-origin: 50px 50px;">
+      <path d="M50,50 C80,10 95,30 90,50 C95,70 75,85 55,75 Z" />
+    </g>
+  </svg>
+</div>
+
+<style>
+  /* Position and sizing */
+  .butterfly {
+    position: fixed; /* floats over the page */
+    inset: 0;        /* viewport-based motion path */
+    width: var(--size);
+    height: var(--size);
+    pointer-events: none;
+    z-index: 40;
+    /* Attach the motion path */
+    /* We’ll swap paths via the data-* class below */
+  }
+  .butterfly-svg {
+    width: 100%;
+    height: 100%;
+    /* Slight vertical bob to keep it lively even when the path is straight */
+    animation: flap 0.6s ease-in-out infinite alternate;
+  }
+  .butterfly-svg .wing-left  { animation: flapLeft  0.25s ease-in-out infinite alternate; }
+  .butterfly-svg .wing-right { animation: flapRight 0.25s ease-in-out infinite alternate; }
+
+  /* Wing flaps */
+  @keyframes flapLeft  { from { transform: rotate(-14deg); } to { transform: rotate(6deg); } }
+  @keyframes flapRight { from { transform: rotate(14deg);  } to { transform: rotate(-6deg);} }
+  @keyframes flap      { from { transform: translateY(-0.5px);} to { transform: translateY(0.5px);} }
+
+  /* Flight along a motion path */
+  .butterfly {
+    /* Default path (loopA) */
+    offset-path: path("M 40 80 C 180 10, 320 150, 480 70 S 760 140, 920 40");
+    offset-rotate: auto 90deg; /* face along path with a slight tilt */
+    animation: fly var(--dur) linear var(--delay) infinite alternate;
+  }
+
+  /* Optional alternate paths: swap with a class like 'path-loopB' */
+  .path-loopB { offset-path: path("M 50 200 C 200 20, 400 240, 600 120 S 900 260, 1100 80"); }
+  .path-figure8 { offset-path: path("M 200 200 C 50 50, 350 50, 200 200 S 350 350, 200 200"); }
+
+  @keyframes fly { to { offset-distance: 100%; } }
+
+  /* Respect accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .butterfly, .butterfly-svg, .wing { animation: none !important; }
+  }
+
+  /* Theming (inherits text color); tweak fill if you want */
+  .butterfly-svg { fill: currentColor; }
+</style>
