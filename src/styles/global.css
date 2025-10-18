@@ -1,3 +1,8 @@
 .time-line-container>div:last-child .education__time>.education__line {
     display: none;
 }
+
+html, body {
+  font-size: 18px !important; /* or 17px if you prefer */
+  line-height: 1.6;
+}
