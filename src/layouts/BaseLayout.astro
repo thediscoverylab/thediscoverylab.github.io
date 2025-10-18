@@ -15,6 +15,9 @@ const {
   sideBarActiveItemID,
   ogType,
 } = Astro.props;
+
+// Only show butterflies on the home page
+const isHome = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -40,11 +43,14 @@ const {
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
 
-    <!-- 🦋 Renders above everything; pointer-events:none in the component -->
-    <Butterfly />
-    <!-- Example extras:
-    <Butterfly delay={2} duration={22} size={48} />
-    <Butterfly delay={5} duration={20} size={64} />
-    -->
+    {isHome && (
+      <>
+        <!-- #1: wide roaming path (exits & re-enters) -->
+        <Butterfly duration={22} size={56} extraClass="path-wander" />
+
+        <!-- #2: path seeded near bottom-right (also exits & re-enters) -->
+        <Butterfly duration={24} size={52} extraClass="path-from-br" />
+      </>
+    )}
   </body>
 </html>

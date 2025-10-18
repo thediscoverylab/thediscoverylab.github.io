@@ -1,46 +1,104 @@
 ---
-const { delay = 0, duration = 18, size = 56 } = Astro.props;
+/* Minimal, no client JS. */
+const {
+  delay = 0,          // seconds
+  duration = 18,      // seconds
+  size = 56,          // px
+  extraClass = "",    // "path-wander" | "path-from-br" | "" (your original)
+  randomStart = true, // randomize start along the path
+} = Astro.props;
+
+// compute a negative delay so it starts mid-path (no runtime script needed)
+const computedDelay = randomStart ? -(Math.random() * duration) : delay;
 ---
 
-<div class="butterfly-fly"
-     style={`--dur:${duration}s; --delay:${delay}s; --size:${size}px;`}>
+<div
+  class={`butterfly-fly ${extraClass}`}
+  style={`--dur:${duration}s; --delay:${computedDelay}s; --size:${size}px;`}
+>
   <img src="/butterfly.svg" alt="Butterfly" aria-hidden="true" />
 </div>
 
 <style>
   .butterfly-fly {
     position: fixed;              /* floats over everything */
-    inset: 0;                     /* flight path in viewport coords */
+    inset: 0;                     /* flight path uses viewport coords */
     width: var(--size);
     height: var(--size);
     pointer-events: none;         /* don't block clicks */
-    z-index: 40;
-
-    /* Flight path & orientation */
-    offset-path: path("M 40 80 C 180 10, 320 150, 480 70 S 760 140, 920 40");
+    z-index: 60;
     offset-rotate: auto 90deg;
-
-    /* Animate along the path */
-    animation: fly var(--dur) linear var(--delay) infinite alternate;
   }
-
   .butterfly-fly img {
     display: block;
     width: 100%;
     height: 100%;
   }
 
-  @keyframes fly {
-    to { offset-distance: 100%; }
+  /* ===== Original path (kept) ===== */
+  .butterfly-fly:not(.path-wander):not(.path-from-br) {
+    offset-path: path("M 40 80 C 180 10, 320 150, 480 70 S 760 140, 920 40");
+    animation: fly var(--dur) linear var(--delay) infinite alternate; /* ping-pong */
   }
 
-  /* Mobile: smaller & gentler path */
+  /* ===== Roaming paths that exit & re-enter =====
+     - Large coordinates push the sprite off-screen before looping.
+     - Animation does NOT alternate: it continuously loops 0% -> 100%. */
+  .butterfly-fly.path-wander {
+    offset-path: path(
+      "M -120 720
+       C  200 540,  480 360,  760 420
+       S 1100 120, 1280 -80
+       C  980  60,  760 180,  540 140
+       S  140 -40, -160 100
+       C   60 220,  260 460,  520 520
+       S  960 700, 1220 780"
+    );
+    animation: roam var(--dur) linear var(--delay) infinite; /* no alternate */
+  }
+
+  /* Starts near bottom-right; also leaves & re-enters */
+  .butterfly-fly.path-from-br {
+    offset-path: path(
+      "M 1320 760
+       C 1100 720, 820 600, 620 520
+       S  260 380,  -80 300
+       C  160 180,  420 120,  680 160
+       S 1020 320, 1280  80
+       C 1120 260,  900 540, 1320 820"
+    );
+    animation: roam var(--dur) linear var(--delay) infinite;
+  }
+
+  @keyframes fly  { to { offset-distance: 100%; } }
+  @keyframes roam { to { offset-distance: 100%; } }
+
+  /* Mobile: smaller & tighter roaming paths */
   @media (max-width: 640px) {
     .butterfly-fly {
-      width: calc(var(--size) * 0.8);
-      height: calc(var(--size) * 0.8);
-      offset-path: path("M 20 300 C 120 120, 220 360, 320 200 S 480 420, 620 240");
-      animation-duration: calc(var(--dur) * 1.2);
+      width: calc(var(--size) * 0.85);
+      height: calc(var(--size) * 0.85);
+    }
+    .butterfly-fly.path-wander {
+      offset-path: path(
+        "M -80 520
+         C  80 420, 220 300, 360 340
+         S 540 180,  720 -60
+         C 520  40, 360 140, 200 120
+         S -40  20, -100 180
+         C  80 260, 220 380, 420 420
+         S 640 560,  760 600"
+      );
+    }
+    .butterfly-fly.path-from-br {
+      offset-path: path(
+        "M 820 560
+         C 640 520, 460 440, 340 380
+         S 120 300,  -60 240
+         C 100 180, 260 140, 420 160
+         S 620 220, 780 120
+         C 660 260, 520 440, 840 600"
+      );
     }
   }
 
