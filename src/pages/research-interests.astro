@@ -5,23 +5,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout title="Research Interests" sideBarActiveItemID="research-interests">
   <div class="space-y-16">
     <!-- Acute Changes section -->
-    <section class="flex flex-col md:flex-row md:items-start md:gap-10">
-      <!-- Image on the left -->
-      <div class="w-full md:w-1/2">
-        <img
-          src="/acute_changes.webp"
-          alt="Acute Changes to Childhood"
-          class="rounded-2xl shadow-md object-cover w-full h-auto"
-        />
+    <section class="grid md:grid-cols-2 md:gap-10 gap-6 items-stretch">
+      <!-- Left: Title over image -->
+      <div class="flex flex-col h-full">
+        <h2 class="text-2xl font-semibold mb-4">Acute Changes to Childhood</h2>
+        <!-- Image fills remaining height to stay flush with the right column -->
+        <div class="flex-1 min-h-0">
+          <img
+            src="/acute_changes.webp"
+            alt="Acute Changes to Childhood"
+            class="w-full h-full object-cover rounded-2xl shadow-md"
+          />
+        </div>
       </div>
 
-      <!-- Text on the right -->
-      <div class="flex-1 mt-6 md:mt-0 text-left leading-relaxed">
-        <h2 class="text-2xl font-semibold mb-4">Acute Changes to Childhood</h2>
-
+      <!-- Right: Background + Big Questions -->
+      <div class="flex flex-col justify-start h-full text-left leading-relaxed">
         <h2 class="text-xl font-bold mb-4">Background</h2>
         <p class="text-left leading-relaxed">
-          Children are spending more time interacting with adults and technology, and less time with peers.
+          Children are spending more time interacting with adults and technology, and less time interacting with peers.
           Importantly, when children interact with peers, they co-construct knowedge with an intellecual equal. In contrast,
           adult-directed activities and virtual environments lead to more passive forms of learning.
           As a result, these acute changes to childhood may have important implications for children's cooperation,
@@ -39,20 +41,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <!-- Great Ideas section -->
-    <section class="flex flex-col md:flex-row md:items-start md:gap-10">
-      <!-- Image on the left -->
-      <div class="w-full md:w-1/2">
-        <img
-          src="/great_ideas.webp"
-          alt="Where Do Great Ideas Come From?"
-          class="rounded-2xl shadow-md object-cover w-full h-auto"
-        />
+    <section class="grid md:grid-cols-2 md:gap-10 gap-6 items-stretch">
+      <!-- Left: Title over image -->
+      <div class="flex flex-col h-full">
+        <h2 class="text-2xl font-semibold mb-4">Where Do Great Ideas Come From?</h2>
+        <!-- Image fills remaining height to stay flush with the right column -->
+        <div class="flex-1 min-h-0">
+          <img
+            src="/great_ideas.webp"
+            alt="Where Do Great Ideas Come From?"
+            class="w-full h-full object-cover rounded-2xl shadow-md"
+          />
+        </div>
       </div>
 
-      <!-- Text on the right -->
-      <div class="flex-1 mt-6 md:mt-0 text-left leading-relaxed">
-        <h2 class="text-2xl font-semibold mb-4">Where Do Great Ideas Come From?</h2>
-
+      <!-- Right: Background + Big Questions -->
+      <div class="flex flex-col justify-start h-full text-left leading-relaxed">
         <h2 class="text-xl font-bold mb-4">Background</h2>
         <p class="text-left leading-relaxed">
           Bayesian learning can explain remarkably complex real-world inference, but it is less clear where new priors
