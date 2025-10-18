@@ -18,12 +18,9 @@ const images = [
 ---
 
 <BaseLayout title="Speaking & Sharing">
-  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 place-items-center">
+  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 place-items-center">
     {images.map((img) => (
-      <div
-        class="relative group overflow-hidden rounded-full shadow-md
-               w-[33vw] h-[33vw] sm:w-[33vw] sm:h-[33vw] md:w-[18rem] md:h-[18rem] lg:w-[20rem] lg:h-[20rem]"
-      >
+      <div class="relative group overflow-hidden rounded-full shadow-md w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48">
         <img
           src={img.src}
           alt={img.caption}
