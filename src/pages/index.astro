@@ -28,17 +28,22 @@ const last_posts = posts.slice(0, 3);
       </p>
     </div>
 
-    <div class="relative mt-8 flex justify-center overflow-hidden pb-28">
-  <a
-    href="https://alissarivero.github.io/projects/"
-    target="_blank"
-    class="btn btn-outline relative z-10"
-  >
-    Learn more about my research
-  </a>
-   <img
-  src="/grass_draw.webp"
-  alt="Grass illustration"
-  class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120vw] max-w-none h-auto object-cover z-0 pointer-events-none"
-/>
+    <!-- keep the button section as is -->
+    <div class="mt-8 flex flex-col items-center">
+      <a
+        href="https://alissarivero.github.io/projects/"
+        target="_blank"
+        class="btn btn-outline mb-2"
+      >
+        Learn more about my research
+      </a>
+
+      <!-- grass directly below button -->
+      <img
+        src="/grass_draw.webp"
+        alt="Grass illustration"
+        class="h-14 md:h-16 object-contain"
+      />
+    </div>
+  </div>
 </BaseLayout>
