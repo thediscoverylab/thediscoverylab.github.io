@@ -4,7 +4,7 @@ const {
   delay = 0,          // seconds
   duration = 18,      // seconds
   size = 56,          // px
-  extraClass = "",    // "path-wander" | "path-from-br" | "" (your original)
+  extraClass = "",    // "path-wander" | "path-from-br" | "" (default path)
   randomStart = true, // randomize start along the path
 } = Astro.props;
 
@@ -27,18 +27,32 @@ const computedDelay = randomStart ? -(Math.random() * duration) : delay;
     height: var(--size);
     pointer-events: none;         /* don't block clicks */
     z-index: 60;
-    offset-rotate: auto 90deg;
+    offset-rotate: auto 90deg;    /* orient along the path */
   }
+
+  /* Subtle flap + drift for natural motion (sprite-only) */
   .butterfly-fly img {
     display: block;
     width: 100%;
     height: 100%;
+    transform-origin: 50% 50%;
+    animation:
+      flap 0.7s ease-in-out infinite,
+      drift 6s ease-in-out infinite;
   }
 
-  /* ===== Original path (kept) ===== */
+  /* ===== Default route (no extraClass) =====
+     Continuous loop; path overshoots right/top/left so it exits & re-enters.
+     Large coords ensure it reaches beyond very wide screens. */
   .butterfly-fly:not(.path-wander):not(.path-from-br) {
-    offset-path: path("M 40 80 C 180 10, 320 150, 480 70 S 760 140, 920 40");
-    animation: fly var(--dur) linear var(--delay) infinite alternate; /* ping-pong */
+    offset-path: path(
+      "M -180  90
+       C  260 240,  720  80, 1160 180
+       S 1680 320,  2300  -60
+       C 1680 260, 1120 420,  460  60
+       S  -220 -140,  -260 120"
+    );
+    animation: roam var(--dur) linear var(--delay) infinite; /* no alternate */
   }
 
   /* ===== Roaming paths that exit & re-enter =====
@@ -46,64 +60,73 @@ const computedDelay = randomStart ? -(Math.random() * duration) : delay;
      - Animation does NOT alternate: it continuously loops 0% -> 100%. */
   .butterfly-fly.path-wander {
     offset-path: path(
-      "M -120 720
-       C  200 540,  480 360,  760 420
-       S 1100 120, 1280 -80
-       C  980  60,  760 180,  540 140
-       S  140 -40, -160 100
-       C   60 220,  260 460,  520 520
-       S  960 700, 1220 780"
-    );
-    animation: roam var(--dur) linear var(--delay) infinite; /* no alternate */
-  }
-
-  /* Starts near bottom-right; also leaves & re-enters */
-  .butterfly-fly.path-from-br {
-    offset-path: path(
-      "M 1320 760
-       C 1100 720, 820 600, 620 520
-       S  260 380,  -80 300
-       C  160 180,  420 120,  680 160
-       S 1020 320, 1280  80
-       C 1120 260,  900 540, 1320 820"
+      "M  -220  840
+       C   140  700,  520 520,  940 560
+       S  1600 420,  2260 -120
+       C  1740   20, 1300 200,  780 160
+       S   100   60,  -260  200
+       C    60  360,  420 540,  960 620
+       S  1620 820,  2140  960"
     );
     animation: roam var(--dur) linear var(--delay) infinite;
   }
 
-  @keyframes fly  { to { offset-distance: 100%; } }
+  /* Starts near bottom-right; also leaves & re-enters from other sides */
+  .butterfly-fly.path-from-br {
+    offset-path: path(
+      "M  2180  980
+       C  1720  900, 1280 740,  980 660
+       S   360  520,  -240  460
+       C    80  360,  520 240,  980 260
+       S  1580  320,  2140   80
+       C  1800  320, 1320  700, 2200 1100"
+    );
+    animation: roam var(--dur) linear var(--delay) infinite;
+  }
+
   @keyframes roam { to { offset-distance: 100%; } }
 
-  /* Mobile: smaller & tighter roaming paths */
+  /* Natural motion overlays */
+  @keyframes flap {
+    0%, 100% { transform: rotate(-2deg) scale(1.00); }
+    50%      { transform: rotate( 2deg) scale(1.04); }
+  }
+  @keyframes drift {
+    0%   { filter: drop-shadow(0 1px 0.8px rgba(0,0,0,.25)); transform: translateY( 0px) rotate(0deg); }
+    25%  { filter: drop-shadow(0 2px 1px   rgba(0,0,0,.22)); transform: translateY(-3px) rotate(-1deg); }
+    50%  { filter: drop-shadow(0 1px 0.8px rgba(0,0,0,.25)); transform: translateY( 1px) rotate(1deg); }
+    75%  { filter: drop-shadow(0 3px 1.2px rgba(0,0,0,.20)); transform: translateY(-2px) rotate(-0.8deg); }
+    100% { filter: drop-shadow(0 1px 0.8px rgba(0,0,0,.25)); transform: translateY( 0px) rotate(0deg); }
+  }
+
+  /* Mobile: smaller sprite; paths still go off-screen */
   @media (max-width: 640px) {
-    .butterfly-fly {
-      width: calc(var(--size) * 0.85);
-      height: calc(var(--size) * 0.85);
-    }
+    .butterfly-fly { width: calc(var(--size) * 0.85); height: calc(var(--size) * 0.85); }
     .butterfly-fly.path-wander {
       offset-path: path(
         "M -80 520
          C  80 420, 220 300, 360 340
-         S 540 180,  720 -60
-         C 520  40, 360 140, 200 120
-         S -40  20, -100 180
+         S 540 180,  820 -80
+         C 620  20, 420 140, 260 120
+         S  20  40, -100 180
          C  80 260, 220 380, 420 420
-         S 640 560,  760 600"
+         S 700 560,  860 640"
       );
     }
     .butterfly-fly.path-from-br {
       offset-path: path(
-        "M 820 560
-         C 640 520, 460 440, 340 380
-         S 120 300,  -60 240
-         C 100 180, 260 140, 420 160
-         S 620 220, 780 120
-         C 660 260, 520 440, 840 600"
+        "M  920  660
+         C  720  580, 520 440, 360 380
+         S  140  300,  -60 240
+         C  100  180, 260 140, 420 160
+         S  640  220,  880 120
+         C  760  260, 620 440, 960 700"
       );
     }
   }
 
   /* Respect reduced-motion preference */
   @media (prefers-reduced-motion: reduce) {
-    .butterfly-fly { animation: none !important; }
+    .butterfly-fly, .butterfly-fly img { animation: none !important; }
   }
 </style>
