@@ -16,7 +16,7 @@ const computedDelay = randomStart ? -(Math.random() * duration) : delay;
   class={`butterfly-fly ${extraClass}`}
   style={`--dur:${duration}s; --delay:${computedDelay}s; --size:${size}px;`}
 >
-  <img src="/plane.svg" alt="Plane" aria-hidden="true" />
+  <img src="/butterfly.svg" alt="Butterfly" aria-hidden="true" />
 </div>
 
 <style>
@@ -31,16 +31,15 @@ const computedDelay = randomStart ? -(Math.random() * duration) : delay;
   }
 
   /* Subtle flap + drift for natural motion (sprite-only) */
- .butterfly-fly img {
-  display: block;
-  width: 200%;               /* 2x bigger */
-  height: 200%;
-  transform-origin: 50% 50%;
-  transform: rotate(-90deg); /* rotate 90° counterclockwise */
-  animation:
-    flap 0.7s ease-in-out infinite,
-    drift 6s ease-in-out infinite;
-}
+  .butterfly-fly img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 50%;
+    animation:
+      flap 0.7s ease-in-out infinite,
+      drift 6s ease-in-out infinite;
+  }
 
   /* ===== Default route (no extraClass) =====
      Continuous loop; path overshoots right/top/left so it exits & re-enters.
