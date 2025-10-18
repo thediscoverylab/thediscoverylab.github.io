@@ -27,15 +27,17 @@ const isHome = Astro.url.pathname === "/";
     {TRANSITION_API && <ViewTransitions />}
   </head>
 
-  <body>
-    <div class="drawer lg:drawer-open bg-base-100 text-base-content">
+  <!-- ✅ Added global text baseline -->
+  <body class="text-base leading-relaxed md:text-[1.05rem] bg-base-100 text-base-content">
+    <div class="drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
-      <div class="drawer-content bg-base-100">
+      <div class="drawer-content">
         <Header title={SITE_TITLE} />
         <div class="md:flex md:justify-center">
-          <main class="p-6 pt-10 lg:max-w-[1000px] xl:max-w-[1100px] 2xl:max-w-[1320px]">
-  <slot />
+          <!-- ✅ Also reinforced text scale inside main -->
+          <main class="p-6 pt-10 lg:max-w-[1000px] xl:max-w-[1100px] 2xl:max-w-[1320px] text-base leading-relaxed md:text-[1.05rem]">
+            <slot />
           </main>
         </div>
         <Footer />
@@ -51,7 +53,6 @@ const isHome = Astro.url.pathname === "/";
 
         <!-- #2: path seeded near bottom-right (also exits & re-enters) -->
         <Butterfly duration={42} size={52} extraClass="path-from-br" />
-        
       </>
     )}
   </body>
