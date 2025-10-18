@@ -3,22 +3,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Research Interests" sideBarActiveItemID="research-interests">
-  <div class="space-y-20 px-4 md:px-10 xl:px-16">
+  <div class="space-y-20">
     <!-- Acute Changes section -->
-    <div>
-      <h2 class="text-3xl font-bold mb-6 text-left">Acute Changes to Childhood</h2>
+    <section>
+      <h2 class="text-3xl font-bold mb-6 text-left px-4 md:px-10 xl:px-16">Acute Changes to Childhood</h2>
 
       <!-- Image and Background side-by-side -->
-      <section class="grid md:grid-cols-[30%_70%] gap-8 items-start max-w-[1200px] mx-auto">
-        <!-- Left: Image (flush, no container) -->
+      <div class="grid md:grid-cols-[30%_70%] gap-8 items-start">
+        <!-- Left: Image (flush full-width) -->
         <img
           src="/acute_changes.webp"
           alt="Acute Changes to Childhood"
-          class="w-full h-auto object-contain"
+          class="w-full h-auto object-cover"
         />
 
         <!-- Right: Background Text -->
-        <div class="text-left leading-relaxed">
+        <div class="text-left leading-relaxed px-4 md:px-10 xl:px-16">
           <h2 class="text-xl font-bold mb-4">Background</h2>
           <p>
             Children are spending more time interacting with adults and technology, and less time interacting with peers.
@@ -29,34 +29,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             cognitive development, with the ultimate goal of informing educational practices and parenting strategies.
           </p>
         </div>
-      </section>
+      </div>
 
-      <!-- Big Questions Full Width Below -->
-      <section class="max-w-[1200px] mx-auto mt-8">
+      <!-- Big Questions -->
+      <div class="px-4 md:px-10 xl:px-16 mt-8">
         <h2 class="text-xl font-bold mb-2">Big Questions</h2>
         <ul class="list-disc pl-6 space-y-2">
           <li>How does adult presence and direction shape children's exploration and cooperative learning?</li>
           <li>What is the variability across children's information processing, construction, and discovery? How do acute changes to childhood shape this variability?</li>
           <li>How does living in a virtual environment impact children's social learning and cognitive flexibility?</li>
         </ul>
-      </section>
-    </div>
+      </div>
+    </section>
 
     <!-- Great Ideas section -->
-    <div>
-      <h2 class="text-3xl font-bold mb-6 text-left">Where Do Great Ideas Come From?</h2>
+    <section>
+      <h2 class="text-3xl font-bold mb-6 text-left px-4 md:px-10 xl:px-16">Where Do Great Ideas Come From?</h2>
 
-      <!-- Image and Background side-by-side -->
-      <section class="grid md:grid-cols-[30%_70%] gap-8 items-start max-w-[1200px] mx-auto">
-        <!-- Left: Image (flush, no container) -->
+      <div class="grid md:grid-cols-[30%_70%] gap-8 items-start">
+        <!-- Left: Image (flush full-width) -->
         <img
           src="/great_ideas.webp"
           alt="Where Do Great Ideas Come From?"
-          class="w-full h-auto object-contain"
+          class="w-full h-auto object-cover"
         />
 
         <!-- Right: Background Text -->
-        <div class="text-left leading-relaxed">
+        <div class="text-left leading-relaxed px-4 md:px-10 xl:px-16">
           <h2 class="text-xl font-bold mb-4">Background</h2>
           <p>
             Bayesian learning can explain remarkably complex real-world inference, but it is less clear where new priors
@@ -65,10 +64,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             agentic exploration, social interaction, and maturation) help explain where ideas come from?
           </p>
         </div>
-      </section>
+      </div>
 
-      <!-- Big Questions Full Width Below -->
-      <section class="max-w-[1200px] mx-auto mt-8">
+      <!-- Big Questions -->
+      <div class="px-4 md:px-10 xl:px-16 mt-8">
         <h2 class="text-xl font-bold mb-2">Big Questions</h2>
         <ul class="list-disc pl-6 space-y-2">
           <li>
@@ -85,7 +84,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             Would we generate more great ideas?
           </li>
         </ul>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </BaseLayout>
