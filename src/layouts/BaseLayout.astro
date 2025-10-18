@@ -46,10 +46,10 @@ const isHome = Astro.url.pathname === "/";
     {isHome && (
       <>
         <!-- #1: wide roaming path (exits & re-enters) -->
-        <Butterfly duration={22} size={56} extraClass="path-wander" />
+        <Butterfly duration={38} size={56} extraClass="path-wander" />
 
         <!-- #2: path seeded near bottom-right (also exits & re-enters) -->
-        <Butterfly duration={24} size={52} extraClass="path-from-br" />
+        <Butterfly duration={42} size={52} extraClass="path-from-br" />
       </>
     )}
   </body>
