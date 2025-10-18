@@ -4,16 +4,15 @@ import { Image } from "astro:assets";
 import SideBarMenu from "./SideBarMenu.astro";
 const { sideBarActiveItemID } = Astro.props;
 ---
-
 <!-- Must be a direct child of the .drawer container in BaseLayout -->
-<div class="drawer-side z-40">
+<div class="drawer-side z-40 bg-white-500">
   <!-- Required overlay for mobile -->
   <label for="my-drawer" class="drawer-overlay"></label>
 
-  <!-- Apply the dark-gray sidebar theme HERE -->
+  <!-- Sidebar container -->
   <aside
     data-theme="sidebarDark"
-    class="px-2 pt-2 min-h-full w-[19rem] bg-base-100 text-base-content flex flex-col"
+    class="px-2 pt-2 min-h-full w-[19rem] text-base-content flex flex-col"
   >
     <div class="w-fit mx-auto mt-5 mb-6">
       <a href="/">
@@ -32,7 +31,6 @@ const { sideBarActiveItemID } = Astro.props;
       </a>
     </div>
 
-    <!-- Inside these components, use theme tokens (bg-base-*, text-base-content), not hardcoded grays -->
     <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     <SideBarFooter />
   </aside>
