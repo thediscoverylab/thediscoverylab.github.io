@@ -16,6 +16,7 @@ const last_posts = posts.slice(0, 3);
     <div class="flex justify-center py-0">
       <img
         src="/name_draw.webp"
+        alt="Name illustration"
         class="h-90 md:h-95 object-contain"
       />
     </div>    
@@ -28,7 +29,7 @@ const last_posts = posts.slice(0, 3);
       </p>
     </div>
 
-    <!-- keep the button section as is -->
+    <!-- button and grass -->
     <div class="mt-8 flex flex-col items-center">
       <a
         href="https://alissarivero.github.io/projects/"
@@ -38,12 +39,14 @@ const last_posts = posts.slice(0, 3);
         Learn more about my research
       </a>
 
-      <!-- grass directly below button -->
-      <img
-        src="/grass_draw.webp"
-        alt="Grass illustration"
-        class="h-14 md:h-16 object-contain"
-      />
+      <!-- Grass matches the name’s width -->
+      <div class="flex justify-center w-full">
+        <img
+          src="/grass_draw.webp"
+          alt="Grass illustration"
+          class="object-contain h-auto w-[90%] md:w-[95%] max-w-[900px]"
+        />
+      </div>
     </div>
   </div>
 </BaseLayout>
