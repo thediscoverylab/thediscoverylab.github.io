@@ -1,45 +1,72 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HorizontalCard from "../components/HorizontalCard.astro";
 ---
 
 <BaseLayout title="Research Interests" sideBarActiveItemID="research-interests">
-  <!-- One-per-row so horizontal layout has space -->
-  <div class="grid gap-8">
-    <!-- Acute Changes card -->
-    <HorizontalCard title="Acute Changes to Childhood" img="/acute_changes.webp">
-      <h2 class="text-xl font-bold mb-4">Background</h2>
-      <p class="text-left leading-relaxed">
-        Children are spending more time interacting with adults and technology, and less time with peers.
-        When children interact with peers, they co-construct knowledge with an intellectual equal. In contrast,
-        adult-directed activities and virtual environments can lead to more passive learning.
-        These acute changes to childhood may affect cooperation, learning, exploration, and idea-generation.
-        My research examines these shifts to inform educational practices and parenting strategies.
-      </p>
+  <div class="space-y-16">
+    <!-- Acute Changes section -->
+    <section class="flex flex-col md:flex-row md:items-start md:gap-10">
+      <!-- Image on the left -->
+      <div class="w-full md:w-1/2">
+        <img
+          src="/acute_changes.webp"
+          alt="Acute Changes to Childhood"
+          class="rounded-2xl shadow-md object-cover w-full h-auto"
+        />
+      </div>
 
-      <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
-      <ul class="list-disc pl-6 space-y-2">
-        <li>How does adult presence/direction shape children’s exploration and cooperative learning?</li>
-        <li>How do acute changes to childhood modulate variability in discovery and construction?</li>
-        <li>How does a more virtual environment impact social learning and cognitive flexibility?</li>
-      </ul>
-    </HorizontalCard>
+      <!-- Text on the right -->
+      <div class="flex-1 mt-6 md:mt-0 text-left leading-relaxed">
+        <h2 class="text-2xl font-semibold mb-4">Acute Changes to Childhood</h2>
 
-    <!-- Great Ideas card -->
-    <HorizontalCard title="Where Do Great Ideas Come From?" img="/great_ideas.webp">
-      <h2 class="text-xl font-bold mb-4">Background</h2>
-      <p class="text-left leading-relaxed">
-        Bayesian learning explains complex inference, but where do new priors/hypotheses originate?
-        Children generate fresh hypotheses constantly. How do they do this so effectively?
-        Treating Bayesian learning as developmentally conditioned—shaped by agentic exploration,
-        social interaction, and maturation—may clarify the origins of creative ideas.
-      </p>
+        <h2 class="text-xl font-bold mb-4">Background</h2>
+        <p class="text-left leading-relaxed">
+          Children are spending more time interacting with adults and technology, and less time with peers.
+          Importantly, when children interact with peers, they co-construct knowedge with an intellecual equal. In contrast,
+          adult-directed activities and virtual environments lead to more passive forms of learning.
+          As a result, these acute changes to childhood may have important implications for children's cooperation,
+          learning, exploration, and idea-generation. My research aims to understand how these shifts impact children's social and
+          cognitive development, with the ultimate goal of informing educational practices and parenting strategies.
+        </p>
 
-      <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
-      <ul class="list-disc pl-6 space-y-2">
-        <li>Can computational models predict moments of insight and help reliably produce great ideas?</li>
-        <li>How do curiosity, play, and peer interaction scaffold hypothesis generation in childhood?</li>
-      </ul>
-    </HorizontalCard>
+        <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>How does adult presence and direction shape children's exploration and cooperative learning?</li>
+          <li>What is the variability across children's information processing, construction, and discovery? How do acute changes to childhood shape this variability?</li>
+          <li>How does living in a virtual environment impact children's social learning and cognitive flexibility?</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Great Ideas section -->
+    <section class="flex flex-col md:flex-row md:items-start md:gap-10">
+      <!-- Image on the left -->
+      <div class="w-full md:w-1/2">
+        <img
+          src="/great_ideas.webp"
+          alt="Where Do Great Ideas Come From?"
+          class="rounded-2xl shadow-md object-cover w-full h-auto"
+        />
+      </div>
+
+      <!-- Text on the right -->
+      <div class="flex-1 mt-6 md:mt-0 text-left leading-relaxed">
+        <h2 class="text-2xl font-semibold mb-4">Where Do Great Ideas Come From?</h2>
+
+        <h2 class="text-xl font-bold mb-4">Background</h2>
+        <p class="text-left leading-relaxed">
+          Bayesian learning can explain remarkably complex real-world inference, but it is less clear where new priors
+          originate. Babies and young children constantly generate fresh hypotheses about the world. How do they do this
+          so effectively? And how might treating Bayesian learning as a developmentally conditioned process (shaped by
+          agentic exploration, social interaction, and maturation) help explain the origins of creative ideas?
+        </p>
+
+        <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Many of our best ideas come when we least expect them. The harder we look, the more elusive creative solutions seem to become. But, what if we could use computational models to predict moments of insight? Could we reliably produce great ideas?</li>
+          <li>How do curiosity, play, and peer interaction scaffold hypothesis generation in childhood?</li>
+        </ul>
+      </div>
+    </section>
   </div>
 </BaseLayout>
