@@ -9,20 +9,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-3xl font-bold mb-6 text-left">Acute Changes to Childhood</h2>
 
       <!-- Image and Background side-by-side -->
-      <section class="grid md:grid-cols-[30%_70%] gap-8 items-stretch max-w-[1200px] mx-auto">
-        <!-- Left: Image -->
-        <div class="rounded-2xl shadow-md bg-base-200 overflow-hidden min-h-[380px] flex items-center justify-center">
-          <img
-            src="/acute_changes.webp"
-            alt="Acute Changes to Childhood"
-            class="max-w-full max-h-full object-contain"
-          />
-        </div>
+      <section class="grid md:grid-cols-[30%_70%] gap-8 items-start max-w-[1200px] mx-auto">
+        <!-- Left: Image (flush, no container) -->
+        <img
+          src="/acute_changes.webp"
+          alt="Acute Changes to Childhood"
+          class="w-full h-auto object-contain"
+        />
 
         <!-- Right: Background Text -->
-        <div class="flex flex-col justify-start h-full text-left leading-relaxed">
+        <div class="text-left leading-relaxed">
           <h2 class="text-xl font-bold mb-4">Background</h2>
-          <p class="text-left leading-relaxed">
+          <p>
             Children are spending more time interacting with adults and technology, and less time interacting with peers.
             Importantly, when children interact with peers, they co-construct knowledge with an intellectual equal. In contrast,
             adult-directed activities and virtual environments lead to more passive forms of learning.
@@ -49,20 +47,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-3xl font-bold mb-6 text-left">Where Do Great Ideas Come From?</h2>
 
       <!-- Image and Background side-by-side -->
-      <section class="grid md:grid-cols-[30%_70%] gap-8 items-stretch max-w-[1200px] mx-auto">
-        <!-- Left: Image -->
-        <div class="rounded-2xl shadow-md bg-base-200 overflow-hidden min-h-[380px] flex items-center justify-center">
-          <img
-            src="/great_ideas.webp"
-            alt="Where Do Great Ideas Come From?"
-            class="max-w-full max-h-full object-contain"
-          />
-        </div>
+      <section class="grid md:grid-cols-[30%_70%] gap-8 items-start max-w-[1200px] mx-auto">
+        <!-- Left: Image (flush, no container) -->
+        <img
+          src="/great_ideas.webp"
+          alt="Where Do Great Ideas Come From?"
+          class="w-full h-auto object-contain"
+        />
 
         <!-- Right: Background Text -->
-        <div class="flex flex-col justify-start h-full text-left leading-relaxed">
+        <div class="text-left leading-relaxed">
           <h2 class="text-xl font-bold mb-4">Background</h2>
-          <p class="text-left leading-relaxed">
+          <p>
             Bayesian learning can explain remarkably complex real-world inference, but it is less clear where new priors
             originate. Babies and young children constantly generate fresh hypotheses about the world. How do they do this
             so effectively? And how might treating Bayesian learning as a developmentally conditioned process (shaped by
@@ -75,15 +71,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <section class="max-w-[1200px] mx-auto mt-8">
         <h2 class="text-xl font-bold mb-2">Big Questions</h2>
         <ul class="list-disc pl-6 space-y-2">
-          <li>Many of our best ideas come when we least expect them. 
-            The harder we look, the more elusive creative solutions seem to become. 
-            But, what if we could use computational models to predict moments of insight? 
-            Could we reliably produce great ideas?</li>
-          <li>Adults tend to converge on the right way to do something. 
-            To our detriment, we pre-screen possibilities through the lens of practicality. 
-Children, on the other hand, explore the hypothesis space without regard for reality. 
-What if we could be a little more like them—would we be more creative, imaginative, and innovative? 
-Would we generate more great ideas?</li>
+          <li>
+            Many of our best ideas come when we least expect them.
+            The harder we look, the more elusive creative solutions seem to become.
+            But, what if we could use computational models to predict moments of insight?
+            Could we reliably produce great ideas?
+          </li>
+          <li>
+            Adults tend to converge on the right way to do something.
+            To our detriment, we pre-screen possibilities through the lens of practicality.
+            Children, on the other hand, explore the hypothesis space without regard for reality.
+            What if we could be a little more like them—would we be more creative, imaginative, and innovative?
+            Would we generate more great ideas?
+          </li>
         </ul>
       </section>
     </div>
