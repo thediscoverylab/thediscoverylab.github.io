@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
+import Butterfly from "../components/butterfly.astro";
 import { ViewTransitions } from "astro:transitions";
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
@@ -38,5 +39,12 @@ const {
 
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
+
+    <!-- 🦋 Renders above everything; pointer-events:none in the component -->
+    <Butterfly />
+    <!-- Example extras:
+    <Butterfly delay={2} duration={22} size={48} />
+    <Butterfly delay={5} duration={20} size={64} />
+    -->
   </body>
 </html>
