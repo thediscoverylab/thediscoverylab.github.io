@@ -1,39 +1,51 @@
 ---
-const { delay = 0, duration = 18, size = 56, extraClass = "" } = Astro.props;
+const { delay = 0, duration = 18, size = 56 } = Astro.props;
 ---
 
-<div class={`butterfly ${extraClass}`}
+<div class="butterfly-fly"
      style={`--dur:${duration}s; --delay:${delay}s; --size:${size}px;`}>
-  <!-- PASTE your SVG markup below; add classes to wings if needed -->
-  <svg class="butterfly-svg" viewBox="0 0 100 100" aria-hidden="true">
-    <!-- example structure you can adapt -->
-    <rect x="48" y="30" width="4" height="40" rx="2" />
-    <circle cx="50" cy="28" r="4" />
-    <g class="wing wing-left"  style="transform-origin:50px 50px">
-      <path d="M50,50 C20,10 5,30 10,50 C5,70 25,85 45,75 Z" />
-    </g>
-    <g class="wing wing-right" style="transform-origin:50px 50px">
-      <path d="M50,50 C80,10 95,30 90,50 C95,70 75,85 55,75 Z" />
-    </g>
-  </svg>
+  <img src="/butterfly.svg" alt="Butterfly" aria-hidden="true" />
 </div>
 
 <style>
-  .butterfly {
-    position: fixed; inset: 0; width: var(--size); height: var(--size);
-    pointer-events: none; z-index: 40;
+  .butterfly-fly {
+    position: fixed;              /* floats over everything */
+    inset: 0;                     /* flight path in viewport coords */
+    width: var(--size);
+    height: var(--size);
+    pointer-events: none;         /* don't block clicks */
+    z-index: 40;
+
+    /* Flight path & orientation */
     offset-path: path("M 40 80 C 180 10, 320 150, 480 70 S 760 140, 920 40");
     offset-rotate: auto 90deg;
+
+    /* Animate along the path */
     animation: fly var(--dur) linear var(--delay) infinite alternate;
   }
-  .butterfly-svg { width:100%; height:100%; }
-  @keyframes fly { to { offset-distance: 100%; } }
 
-  /* Wing flaps */
-  .wing-left  { animation: flapLeft  0.25s ease-in-out infinite alternate; }
-  .wing-right { animation: flapRight 0.25s ease-in-out infinite alternate; }
-  @keyframes flapLeft  { from { transform: rotate(-14deg); } to { transform: rotate(6deg); } }
-  @keyframes flapRight { from { transform: rotate(14deg);  } to { transform: rotate(-6deg);} }
+  .butterfly-fly img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 
-  @media (prefers-reduced-motion: reduce) { .butterfly, .wing-left, .wing-right { animation: none !important; } }
+  @keyframes fly {
+    to { offset-distance: 100%; }
+  }
+
+  /* Mobile: smaller & gentler path */
+  @media (max-width: 640px) {
+    .butterfly-fly {
+      width: calc(var(--size) * 0.8);
+      height: calc(var(--size) * 0.8);
+      offset-path: path("M 20 300 C 120 120, 220 360, 320 200 S 480 420, 620 240");
+      animation-duration: calc(var(--dur) * 1.2);
+    }
+  }
+
+  /* Respect reduced-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .butterfly-fly { animation: none !important; }
+  }
 </style>
