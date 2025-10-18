@@ -5,56 +5,63 @@ import SideBarMenu from "./SideBarMenu.astro";
 const { sideBarActiveItemID } = Astro.props;
 ---
 
-<!-- Force bigger menu text & normalize icon alignment -->
+<!-- Must be a direct child of the .drawer container in BaseLayout -->
+<div class="drawer-side z-40 bg-white-500">
+  <!-- Required overlay for mobile -->
+  <label for="my-drawer" class="drawer-overlay"></label>
 
+  <!-- Sidebar container -->
+  <aside
+    data-theme="sidebarDark"
+    class="px-8 pt-8 h-screen w-full sm:w-[26rem] leading-relaxed text-base-content flex flex-col overflow-y-auto"
+  >
+    <!-- Profile Image -->
+    <div class="w-fit mx-auto mt-8 mb-10">
+      <a href="/">
+        <div class="avatar transition ease-in-out hover:scale-[103%] block m-auto">
+          <div class="w-[16rem]">
+            <Image
+              class="mask mask-circle object-cover"
+              format="webp"
+              width={600}
+              height={600}
+              src="/profile.webp"
+              alt="Profile image"
+            />
+          </div>
+        </div>
+      </a>
+    </div>
 
-    <!-- Menu fills remaining space so footer sits at bottom -->
+    <!-- Menu fills remaining space so footer stays at bottom -->
     <div class="flex-1">
       <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     </div>
 
-    <!-- Footer stays at bottom -->
+    <!-- Footer -->
     <SideBarFooter />
   </aside>
 </div>
 
-<!-- Force bigger menu text & normalize icon alignment -->
+<!-- Force bigger menu text & normalize icon alignment (scoped to this sidebar) -->
 <style is:global>
-  /* ========================
-     Menu text sizing (yours)
-     ======================== */
+  /* Bigger menu text regardless of DaisyUI defaults */
   aside[data-theme="sidebarDark"] .menu,
   aside[data-theme="sidebarDark"] .menu :is(a, button, span) {
-    font-size: 1.3rem !important;   /* ~24px */
-    line-height: 1.4 !important;
+    font-size: 1.3rem !important;
+    line-height: 1.45 !important;
   }
-  aside[data-theme="sidebarDark"] .menu li {
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-  }
+  aside[data-theme="sidebarDark"] .menu li { margin: 0.25rem 0; }
 
-  /* ==========================================
-     Icon baseline normalization for the footer
-     (assumes your footer icons live in .social-icons)
-     ========================================== */
+  /* Icon baseline normalization (doesn't alter your footer markup) */
   aside[data-theme="sidebarDark"] .social-icons a {
-    display: inline-flex;       /* centers the SVG within a square */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;                /* consistent icon box */
-    height: 24px;
-    line-height: 0;             /* kills baseline gap */
+    width: 24px; height: 24px;
+    line-height: 0;
   }
-
-  aside[data-theme="sidebarDark"] .social-icons svg {
-    display: block;             /* removes inline-baseline sag */
-    vertical-align: middle;
-    width: 20px;                /* consistent inner glyph size */
-    height: 20px;
-  }
-
-  /* Fallbacks if your footer doesn't use .social-icons:
-     these will still fix baseline sag without affecting layout */
+  aside[data-theme="sidebarDark"] .social-icons svg,
   aside[data-theme="sidebarDark"] footer a svg,
   aside[data-theme="sidebarDark"] .sidebar-footer a svg {
     display: block;
