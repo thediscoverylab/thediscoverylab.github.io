@@ -6,14 +6,14 @@ const { sideBarActiveItemID } = Astro.props;
 ---
 
 <!-- Must be a direct child of the .drawer container in BaseLayout -->
-<div class="drawer-side z-40 bg-white-500">
+<div class="drawer-side z-40 bg-white-500 h-screen">
   <!-- Required overlay for mobile -->
   <label for="my-drawer" class="drawer-overlay"></label>
 
   <!-- Sidebar container -->
   <aside
     data-theme="sidebarDark"
-    class="px-8 pt-8 min-h-full w-[26rem] leading-relaxed text-base-content flex flex-col"
+    class="px-8 pt-8 h-full min-h-screen w-[26rem] leading-relaxed text-base-content flex flex-col overflow-y-auto"
   >
     <!-- Profile Image (unchanged) -->
     <div class="w-fit mx-auto mt-8 mb-10">
@@ -33,20 +33,24 @@ const { sideBarActiveItemID } = Astro.props;
       </a>
     </div>
 
-    <!-- Bigger text for menu (overrides DaisyUI sizes) -->
-    <div class="[&_.menu]:!text-2xl [&_.menu_li>*]:!text-inherit [&_.menu_a]:!text-inherit md:[&_.menu]:!text-[1.6rem]">
+    <!-- Menu fills remaining space so footer sits at bottom -->
+    <div class="flex-1">
       <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     </div>
 
-    <!-- Icon alignment normalizer (doesn't change your footer markup) -->
-    <div
-      class="mt-6 flex justify-center
-             [&_*]:leading-none
-             [&_a]:inline-flex [&_a]:items-center [&_a]:justify-center [&_a]:w-9 [&_a]:h-9
-             [&_svg]:block [&_svg]:w-6 [&_svg]:h-6
-             [&_img]:block [&_img]:w-6 [&_img]:h-6 [&_img]:object-contain"
-    >
-      <SideBarFooter />
-    </div>
+    <!-- Footer stays at bottom -->
+    <SideBarFooter />
   </aside>
 </div>
+
+<!-- Force bigger menu text regardless of DaisyUI defaults -->
+<style is:global>
+  /* Target only this sidebar instance via data-theme on the aside */
+  aside[data-theme="sidebarDark"] .menu,
+  aside[data-theme="sidebarDark"] .menu :is(a, button, span) {
+    font-size: 1.5rem !important;   /* bump size: ~24px */
+    line-height: 1.6 !important;
+  }
+  /* Optional: slightly tighter list spacing if needed */
+  aside[data-theme="sidebarDark"] .menu li { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+</style>
