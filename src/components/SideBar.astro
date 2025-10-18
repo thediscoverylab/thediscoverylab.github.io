@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import SideBarMenu from "./SideBarMenu.astro";
 const { sideBarActiveItemID } = Astro.props;
 ---
+
 <!-- Must be a direct child of the .drawer container in BaseLayout -->
 <div class="drawer-side z-40 bg-white-500">
   <!-- Required overlay for mobile -->
@@ -12,12 +13,12 @@ const { sideBarActiveItemID } = Astro.props;
   <!-- Sidebar container -->
   <aside
     data-theme="sidebarDark"
-    class="px-2 pt-2 min-h-full w-[22rem] text-base-content flex flex-col"
+    class="px-4 pt-4 min-h-full w-[30rem] text-[1.05rem] md:text-[1.1rem] leading-relaxed text-base-content flex flex-col"
   >
-    <div class="w-fit mx-auto mt-5 mb-6">
+    <div class="w-fit mx-auto mt-6 mb-8">
       <a href="/">
         <div class="avatar transition ease-in-out hover:scale-[102%] block m-auto">
-          <div class="w-[12rem]">
+          <div class="w-[13rem]">
             <Image
               class="mask mask-circle"
               format="webp"
