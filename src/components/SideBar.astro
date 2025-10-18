@@ -33,12 +33,20 @@ const { sideBarActiveItemID } = Astro.props;
       </a>
     </div>
 
-    <!-- FORCE bigger text only for the menu links/buttons -->
-    <div class="[&_.menu]:!text-xl md:[&_.menu]:!text-2xl [&_.menu_li>*]:!text-inherit [&_.menu_a]:!text-inherit">
+    <!-- Bigger text for menu (overrides DaisyUI sizes) -->
+    <div class="[&_.menu]:!text-2xl [&_.menu_li>*]:!text-inherit [&_.menu_a]:!text-inherit md:[&_.menu]:!text-[1.6rem]">
       <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     </div>
 
-    <!-- Footer left untouched so your icons don’t shift -->
-    <SideBarFooter />
+    <!-- Icon alignment normalizer (doesn't change your footer markup) -->
+    <div
+      class="mt-6 flex justify-center
+             [&_*]:leading-none
+             [&_a]:inline-flex [&_a]:items-center [&_a]:justify-center [&_a]:w-9 [&_a]:h-9
+             [&_svg]:block [&_svg]:w-6 [&_svg]:h-6
+             [&_img]:block [&_img]:w-6 [&_img]:h-6 [&_img]:object-contain"
+    >
+      <SideBarFooter />
+    </div>
   </aside>
 </div>
