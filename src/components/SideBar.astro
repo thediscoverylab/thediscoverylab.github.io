@@ -38,35 +38,6 @@ const { sideBarActiveItemID } = Astro.props;
       <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     </div>
 
-    <!-- Footer Icons (OSF aligned fix) -->
-    <div class="mt-8 mb-4 flex justify-center space-x-6">
-      <a
-        href="https://osf.io/"
-        target="_blank"
-        class="inline-flex items-center justify-center w-8 h-8 align-middle"
-        aria-label="Open Science Framework"
-      >
-        <!-- normalize OSF SVG size and baseline -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="w-7 h-7"
-        >
-          <title>Open Science Framework</title>
-          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/>
-          <path
-            d="M12 6v6l4 2"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            fill="none"
-          />
-        </svg>
-      </a>
-
-      <SideBarFooter />
-    </div>
+        <SideBarFooter />
   </aside>
 </div>
