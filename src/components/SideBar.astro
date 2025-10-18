@@ -13,13 +13,13 @@ const { sideBarActiveItemID } = Astro.props;
   <!-- Sidebar container -->
   <aside
     data-theme="sidebarDark"
-    class="px-6 pt-6 min-h-full w-[25rem] text-[1.15rem] md:text-[1.25rem] leading-relaxed text-base-content flex flex-col"
+    class="px-8 pt-8 min-h-full w-[26rem] text-[1.3rem] md:text-[1.4rem] leading-relaxed text-base-content flex flex-col"
   >
     <!-- Profile Image -->
     <div class="w-fit mx-auto mt-8 mb-10">
       <a href="/">
         <div class="avatar transition ease-in-out hover:scale-[103%] block m-auto">
-          <div class="w-[15rem]">
+          <div class="w-[16rem]">
             <Image
               class="mask mask-circle object-cover"
               format="webp"
@@ -33,10 +33,40 @@ const { sideBarActiveItemID } = Astro.props;
       </a>
     </div>
 
-    <!-- Menu -->
-    <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+    <!-- Sidebar Menu -->
+    <div class="flex-1">
+      <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+    </div>
 
-    <!-- Footer -->
-    <SideBarFooter />
+    <!-- Footer Icons (OSF aligned fix) -->
+    <div class="mt-8 mb-4 flex justify-center space-x-6">
+      <a
+        href="https://osf.io/"
+        target="_blank"
+        class="inline-flex items-center justify-center w-8 h-8 align-middle"
+        aria-label="Open Science Framework"
+      >
+        <!-- normalize OSF SVG size and baseline -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-7 h-7"
+        >
+          <title>Open Science Framework</title>
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <path
+            d="M12 6v6l4 2"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none"
+          />
+        </svg>
+      </a>
+
+      <SideBarFooter />
+    </div>
   </aside>
 </div>
