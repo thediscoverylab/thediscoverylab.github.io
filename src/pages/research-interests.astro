@@ -3,75 +3,70 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 ---
 
-<BaseLayout title = "Research Interests" sideBarActiveItemID="research-interests">
+<BaseLayout title="Research Interests" sideBarActiveItemID="research-interests">
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5">Acute Changes to Childhood</div>
-  </div>
+  <!-- =========================
+       Section 1: Acute Changes
+  ========================== -->
+  <section class="mb-12">
+    <h1 class="text-3xl font-bold mb-5">Acute Changes to Childhood</h1>
 
-    <div>
-    <div class="text-xl w-full font-bold mb-5">Background</div>
-  </div>
+    <h2 class="text-xl font-bold mb-4">Background</h2>
+    <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+      <img
+        src="/acute_changes.webp" 
+        alt="Acute Changes to Childhood"
+        class="w-40 h-auto rounded-md shadow-md flex-shrink-0"
+      />
+      <p class="text-justify leading-relaxed">
+        Children are spending more time interacting with adults and technology, and less time playing with peers.
+        These acute changes to childhood may have important implications for children's development of cooperation,
+        learning, and exploration. My research aims to understand how these shifts impact children's social and
+        cognitive development, with the ultimate goal of informing educational practices and parenting strategies.
+      </p>
+    </div>
 
-  <div class="flex flex-col md:flex-row items-center md:items-start mb-10 gap-6">
-  <img 
-    src="/acute_changes.webpp" 
-    alt="Acute Changes to Childhood"
-    class="w-40 h-auto rounded-md shadow-md flex-shrink-0"
-  />
+    <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Which changes (time with peers, adult-directed time, tech exposure) matter most for cooperation and exploration?</li>
+      <li>When in development are these effects largest, and are they reversible with targeted interventions?</li>
+      <li>How do school and family contexts buffer or amplify these shifts?</li>
+    </ul>
+  </section>
 
-    <div class="mb-10 text-justify">
-    Children are spending more time interacting with adults and technology, and less time playing with peers.
-    These acute changes to childhood may have important implications for children's development of cooperation, learning, and exploration.
-    My research aims to understand how these shifts impact children's social and cognitive development, 
-    with the ultimate goal of informing educational practices and parenting strategies.
-  </div>
+  <!-- ==========================================
+       Section 2: Where Do Great Ideas Come From?
+  =========================================== -->
+  <section class="mb-12">
+    <h1 class="text-3xl font-bold mb-5">Where Do Great Ideas Come From?</h1>
 
-      <div>
-    <div class="text-xl w-full font-bold mb-5">Big Questions</div>
-  </div>
+    <h2 class="text-xl font-bold mb-4">Background</h2>
+    <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+      <img
+        src="/great_ideas.webp"
+        alt="Where do great ideas come from?"
+        class="w-40 h-auto rounded-md shadow-md flex-shrink-0"
+      />
+      <p class="text-justify leading-relaxed">
+        Bayesian learning can explain remarkably complex real-world inference, but it is less clear where new priors
+        originate. Babies and young children constantly generate fresh hypotheses about the world. How do they do this
+        so effectively? And how might treating Bayesian learning as a developmentally conditioned process—shaped by
+        agentic exploration, social interaction, and maturation—help explain the origins of creative ideas?
+      </p>
+    </div>
 
-  
+    <h2 class="text-xl font-bold mt-6 mb-2">Big Questions</h2>
+    <div class="space-y-4 text-justify leading-relaxed">
+      <p>
+        Adults converge on “the right way” and pre-screen options for practicality. Children explore the hypothesis
+        space with fewer constraints. If adults behaved a bit more like children, would creativity and innovation
+        increase?
+      </p>
+      <p class="mb-0">
+        Many of our best ideas arrive when we least expect them. Can computational models predict moments of insight?
+        Could we reliably produce great ideas?
+      </p>
+    </div>
+  </section>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Where do Great Ideas Come From?</div>
-  </div>
-
-      <div>
-    <div class="text-xl w-full font-bold mb-5">Background</div>
-  </div>
-
-    <div class="flex flex-col md:flex-row items-center md:items-start mb-10 gap-6">
-  <img 
-    src="/great_ideas.webpp" 
-    alt="Where do great ideas come from?"
-    class="w-40 h-auto rounded-md shadow-md flex-shrink-0"
-  />
-
-    <div class="mb-10 text-justify">
-    Bayesian learning theory explains incredibly complex learning in the real world.
-    But Bayesian frameworks are not as good at explaining where new ideas, or priors, come from. 
-    Babies and young children are constantly generating new hypotheses about the world around them.
-    How do they do this so effectively? And how can thinking of bayesian learning as a developmentally-conditioned processes
-    (shaped by agentic exploration, social interactions, and maturation)
-    help us understand where great ideas come from?
-  </div>
-
-      <div>
-    <div class="text-xl w-full font-bold mb-5">Big Questions</div>
-  </div>
-
-  <div class="mb-10 text-justify">
-       Adults tend to converge on the right way to do something. 
-    To our detriment, we pre-screen possibilities through the lens of practicality. 
-    On the other hand, children explore the hypothesis space without regard for reality. 
-    What if adults could be a little more like children? Would we be more creative, imaginative, and innovative?
-    Would we generate more great ideas?. 
-  </div>
-
-  <div class="mb-10 text-justify">
-    Many of our best ideas come when we least expect them. 
-    The harder we look, the more elusive creative solutions seem to become. But,
-    what if we could use computational models to predict moments of insight?
-    Could we reliably produce great ideas?
-  </div>
+</BaseLayout>
