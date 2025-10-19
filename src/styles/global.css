@@ -1,25 +1,43 @@
-.time-line-container>div:last-child .education__time>.education__line {
-    display: none;
+/* Hide last timeline connector */
+.time-line-container > div:last-child .education__time > .education__line {
+  display: none;
 }
 
-html, body {
-  font-size: 16px !important; /* or 17px if you prefer */
+/* Global base text size */
+html,
+body {
+  font-size: 16px !important; /* bump to 17px if you want slightly larger overall text */
   line-height: 1.4;
 }
 
+/* ----------------------------
+   MENU & DROPDOWN STYLING FIX
+   ---------------------------- */
+
+/* Default dropdown summary inside menu */
 .menu details summary {
-  font-size: 1rem;         /* same as text-base */
-  padding-top: 0.75rem;    /* same as py-3 */
+  font-size: 1rem;          /* same as text-base */
+  padding-top: 0.75rem;     /* py-3 */
   padding-bottom: 0.75rem;
   line-height: 1.5;
   cursor: pointer;
 }
 
+/* When dropdown is open */
 .menu details[open] summary {
-    font-size: 1rem;         /* same as text-base */
-  padding-top: 0.75rem;    /* same as py-3 */
+  font-size: 1rem;
+  padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   line-height: 1.5;
   cursor: pointer;
-  font-weight: 600;        /* optional: highlight when open */
+  font-weight: 600;          /* bold highlight when open */
+}
+
+/* 🔧 DaisyUI fix — ensures summary text matches normal .menu link size */
+.menu.menu-md :where(li > details > summary),
+.menu.menu-md :where(li > details[open] > summary) {
+  font-size: 1rem !important;   /* enforce equal to text-base */
+  line-height: 1.5 !important;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
