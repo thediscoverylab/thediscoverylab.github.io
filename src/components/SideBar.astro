@@ -5,17 +5,15 @@ import SideBarMenu from "./SideBarMenu.astro";
 const { sideBarActiveItemID } = Astro.props;
 ---
 
-<!-- Must be a direct child of the .drawer container in BaseLayout -->
+<!-- Sidebar -->
 <div class="drawer-side z-40 bg-white-500 h-screen">
-  <!-- Required overlay for mobile -->
   <label for="my-drawer" class="drawer-overlay"></label>
 
-  <!-- Sidebar container -->
   <aside
     data-theme="sidebarDark"
-    class="px-8 pt-8 h-full min-h-screen w-[25rem] leading-relaxed text-base-content flex flex-col overflow-y-auto"
+    class="px-8 pt-8 h-full w-[25rem] leading-relaxed text-base-content flex flex-col justify-between"
   >
-    <!-- Profile Image (unchanged) -->
+    <!-- Profile Image -->
     <div class="w-fit mx-auto mt-4 mb-4">
       <a href="/">
         <div class="avatar transition ease-in-out hover:scale-[103%] block m-auto">
@@ -33,24 +31,80 @@ const { sideBarActiveItemID } = Astro.props;
       </a>
     </div>
 
-    <!-- Menu fills remaining space so footer sits at bottom -->
-    <div class="flex-1">
+    <!-- Menu -->
+    <div class="flex-1 flex flex-col justify-start">
       <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     </div>
 
-    <!-- Footer stays at bottom -->
+    <!-- Footer -->
     <SideBarFooter />
   </aside>
 </div>
 
-<!-- Force bigger menu text regardless of DaisyUI defaults -->
+<!-- Global sidebar style overrides -->
 <style is:global>
-  /* Target only this sidebar instance via data-theme on the aside */
-  aside[data-theme="sidebarDark"] .menu,
-  aside[data-theme="sidebarDark"] .menu :is(a, button, span) {
-    font-size: 1.3rem !important;   /* bump size: ~24px */
-    line-height: 1.35 !important;
+  /* ===========================
+     BASE FONT SIZE + SPACING
+     =========================== */
+  html,
+  body {
+    font-size: 16px !important;
+    line-height: 1.4;
   }
-  /* Optional: slightly tighter list spacing if needed */
-  aside[data-theme="sidebarDark"] .menu li { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+
+  aside[data-theme="sidebarDark"] .menu,
+  aside[data-theme="sidebarDark"] .menu :is(a, button, span, summary) {
+    font-size: 1.3rem !important; /* bump up size (~21px) */
+    line-height: 1.4 !important;
+  }
+
+  /* ===========================
+     DROPDOWN “Research” FIX
+     =========================== */
+  aside[data-theme="sidebarDark"] .menu :where(li > details > summary),
+  aside[data-theme="sidebarDark"] .menu :where(li > details[open] > summary) {
+    font-size: 1.3rem !important;   /* match other items */
+    line-height: 1.4 !important;
+    padding-top: 0.75rem;           /* py-3 */
+    padding-bottom: 0.75rem;
+    font-weight: 600;               /* highlight */
+    cursor: pointer;
+  }
+
+  /* ===========================
+     MENU ITEM SPACING
+     =========================== */
+  aside[data-theme="sidebarDark"] .menu li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* ===========================
+     FOOTER ICON ALIGNMENT
+     =========================== */
+  aside[data-theme="sidebarDark"] .social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    line-height: 0;
+  }
+
+  aside[data-theme="sidebarDark"] .social-icons svg,
+  aside[data-theme="sidebarDark"] .social-icons img {
+    display: block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* ===========================
+     FULL HEIGHT (NO SCROLL)
+     =========================== */
+  .drawer-side,
+  .drawer-side aside {
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
 </style>
