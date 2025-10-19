@@ -16,5 +16,10 @@ html, body {
 }
 
 .menu details[open] summary {
+    font-size: 1rem;         /* same as text-base */
+  padding-top: 0.75rem;    /* same as py-3 */
+  padding-bottom: 0.75rem;
+  line-height: 1.5;
+  cursor: pointer;
   font-weight: 600;        /* optional: highlight when open */
 }
