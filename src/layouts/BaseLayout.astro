@@ -3,7 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
-import Astronaute from "../components/astronaut.astro";
+import Astronaut from "../components/astronaut.astro";
 import { ViewTransitions } from "astro:transitions";
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
@@ -16,7 +16,7 @@ const {
   ogType,
 } = Astro.props;
 
-// Only show butterflies on the home page
+// Only show astronauts on the home page
 const isHome = Astro.url.pathname === "/";
 ---
 
@@ -27,19 +27,19 @@ const isHome = Astro.url.pathname === "/";
     {TRANSITION_API && <ViewTransitions />}
   </head>
 
-  <!-- ✅ Added global text baseline -->
-<body class="leading-relaxed bg-base-100 text-base-content">
+  <body class="leading-relaxed bg-base-100 text-base-content">
     <div class="drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
       <div class="drawer-content">
         <Header title={SITE_TITLE} />
+
         <div class="md:flex md:justify-center">
-          <!-- ✅ Also reinforced text scale inside main -->
           <main class="p-6 pt-10 lg:max-w-[1000px] xl:max-w-[1100px] 2xl:max-w-[1320px] text-base leading-relaxed md:text-[1.05rem]">
             <slot />
           </main>
         </div>
+
         <Footer />
       </div>
 
@@ -48,11 +48,11 @@ const isHome = Astro.url.pathname === "/";
 
     {isHome && (
       <>
-        <!-- #1: wide roaming path (exits & re-enters) -->
-        <Butterfly duration={46} size={56} extraClass="path-wander" />
+        {/* Astronaut #1: wide roaming path (exits & re-enters) */}
+        <Astronaut duration={46} size={56} extraClass="path-wander" />
 
-        <!-- #2: path seeded near bottom-right (also exits & re-enters) -->
-        <Butterfly duration={42} size={52} extraClass="path-from-br" />
+        {/* Astronaut #2: seeded near bottom-right */}
+        <Astronaut duration={42} size={52} extraClass="path-from-br" />
       </>
     )}
   </body>
