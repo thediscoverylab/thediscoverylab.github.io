@@ -1,0 +1,136 @@
+---
+/* Minimal, no client JS. */
+const {
+  delay = 0,          // seconds
+  duration = 18,      // seconds
+  size = 64,          // px
+  extraClass = "",    // "path-wander" | "path-from-br" | "" (default path)
+  randomStart = true, // randomize start along the path
+  spinDir = Math.random() < 0.5 ? 1 : -1, // random clockwise vs counterclockwise
+} = Astro.props;
+
+// compute a negative delay so it starts mid-path (no runtime script needed)
+const computedDelay = randomStart ? -(Math.random() * duration) : delay;
+---
+
+<div
+  class={`astro-float ${extraClass}`}
+  style={`--dur:${duration}s; --delay:${computedDelay}s; --size:${size}px; --spinDir:${spinDir};`}
+>
+  <img src="/astronaut.svg" alt="Astronaut floating" aria-hidden="true" />
+</div>
+
+<style>
+  .astro-float {
+    position: fixed;
+    inset: 0;
+    width: var(--size);
+    height: var(--size);
+    pointer-events: none;
+    z-index: 60;
+    offset-rotate: auto;
+  }
+
+  .astro-float img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 50%;
+    animation:
+      spin calc(var(--dur) * 0.8) linear infinite,
+      bob 6s ease-in-out infinite;
+  }
+
+  /* ===== Default route (no extraClass) ===== */
+  .astro-float:not(.path-wander):not(.path-from-br) {
+    offset-path: path(
+      "M -180  90
+       C  260 240,  720  80, 1160 180
+       S 1680 320, 2300 -60
+       C 1680 260, 1120 420,  460 60
+       S -220 -140, -260 120"
+    );
+    animation: roam var(--dur) linear var(--delay) infinite;
+  }
+
+  /* ===== Wander route ===== */
+  .astro-float.path-wander {
+    offset-path: path(
+      "M  -220  840
+       C   140  700,  520 520,  940 560
+       S  1600 420, 2260 -120
+       C  1740   20, 1300 200,  780 160
+       S   100   60, -260 200
+       C    60  360,  420 540,  960 620
+       S  1620 820, 2140 960"
+    );
+    animation: roam var(--dur) linear var(--delay) infinite;
+  }
+
+  /* ===== From bottom-right route ===== */
+  .astro-float.path-from-br {
+    offset-path: path(
+      "M  2180 980
+       C  1720 900, 1280 740, 980 660
+       S   360 520, -240 460
+       C    80 360,  520 240, 980 260
+       S  1580 320, 2140  80
+       C  1800 320, 1320 700, 2200 1100"
+    );
+    animation: roam var(--dur) linear var(--delay) infinite;
+  }
+
+  @keyframes roam {
+    to { offset-distance: 100%; }
+  }
+
+  /* ===== Astronaut motion ===== */
+  @keyframes spin {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(calc(var(--spinDir) * 180deg)) scale(1.03); }
+    100% { transform: rotate(calc(var(--spinDir) * 360deg)) scale(1); }
+  }
+
+  @keyframes bob {
+    0%   { filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); translate: 0 0; }
+    25%  { filter: drop-shadow(0 2px 2px rgba(0,0,0,.22)); translate: 0 -3px; }
+    50%  { filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); translate: 1px 1px; }
+    75%  { filter: drop-shadow(0 3px 2px rgba(0,0,0,.20)); translate: -1px -2px; }
+    100% { filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); translate: 0 0; }
+  }
+
+  @media (max-width: 640px) {
+    .astro-float {
+      width: calc(var(--size) * 0.85);
+      height: calc(var(--size) * 0.85);
+    }
+    .astro-float.path-wander {
+      offset-path: path(
+        "M -80 520
+         C  80 420, 220 300, 360 340
+         S 540 180, 820 -80
+         C 620  20, 420 140, 260 120
+         S  20  40, -100 180
+         C  80 260, 220 380, 420 420
+         S 700 560, 860 640"
+      );
+    }
+    .astro-float.path-from-br {
+      offset-path: path(
+        "M 920 660
+         C 720 580, 520 440, 360 380
+         S 140 300, -60 240
+         C 100 180, 260 140, 420 160
+         S 640 220, 880 120
+         C 760 260, 620 440, 960 700"
+      );
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .astro-float,
+    .astro-float img {
+      animation: none !important;
+    }
+  }
+</style>
